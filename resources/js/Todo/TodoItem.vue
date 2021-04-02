@@ -10,20 +10,35 @@
           />
         </div>
         <div class="ml-4">
-          <div class="text-sm font-medium text-gray-900">Darwin Salinas</div>
-          <div class="text-sm text-gray-500">darwin.salinas@example.com</div>
+          <div class="text-sm font-medium text-gray-900">
+            {{ todo.user.name }}
+          </div>
+          <div class="text-sm text-gray-500">{{ todo.user.email }}</div>
         </div>
       </div>
     </td>
     <td class="px-6 py-4 whitespace-nowrap">
-      <div class="text-sm text-gray-900">Permitir agregar nuevas tareas a la lista</div>
+      <div class="text-sm text-gray-900">{{ todo.description }}</div>
       <div class="text-sm text-gray-500">Feature</div>
     </td>
     <td class="px-6 py-4 whitespace-nowrap">
       <span
+        v-if="todo.status_id == status.Todo"
+        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800"
+      >
+        Todo
+      </span>
+      <span
+        v-if="todo.status_id == status.Doing"
+        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800"
+      >
+        Doing
+      </span>
+      <span
+        v-if="todo.status_id == status.Completed"
         class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
       >
-        Active
+        Completed
       </span>
     </td>
 
@@ -32,3 +47,19 @@
     </td>
   </tr>
 </template>
+<script>
+export default {
+  props: {
+    todo: Object,
+  },
+  data() {
+    return {
+        status: {
+            'Todo': 1,
+            'Doing': 2,
+            'Completed': 3,
+        }
+    };
+  },
+};
+</script>

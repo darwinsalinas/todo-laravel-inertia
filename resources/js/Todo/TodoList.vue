@@ -32,10 +32,7 @@
               </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-              <TodoItem
-                v-for="item in [1, 2, 3, 4, 5]"
-                :key="item"
-              />
+              <TodoItem v-for="(item, index) in todos" :key="index" :todo="item"/>
             </tbody>
           </table>
         </div>
@@ -49,6 +46,9 @@ import TodoItem from "@/Todo/TodoItem.vue";
 export default {
   components: {
     TodoItem,
+  },
+  props: {
+    todos: Array,
   },
 };
 </script>
